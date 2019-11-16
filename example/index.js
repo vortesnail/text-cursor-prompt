@@ -3,7 +3,7 @@ const promptContainer = document.querySelector('.prompt-container');
 const promptContent = document.querySelector('#prompt-content');
 
 const config = {
-  text: 'I am the text you want to show',
+  text: 'I am the text you want to show, now you can see...and emmm you know',
   xOffset: -5,
   yOffset: 26,
   moveDuration: 0.2

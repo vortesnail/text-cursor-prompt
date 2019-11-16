@@ -12,8 +12,13 @@
     "type": "git",
     "url": "git+https://github.com/vortesnail/text-cursor-prompt.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "text-cursor-prompt",
+    "prompt",
+    "text-cursor",
+    "text-prompt"
+  ],
+  "author": "vortesnail",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/vortesnail/text-cursor-prompt/issues"
