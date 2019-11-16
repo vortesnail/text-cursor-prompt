@@ -69,6 +69,8 @@ function popTextCursorPrompt(textEle, promptContainerEle, promptTextELe, config)
   // end listen
   this.end = function() {
     textEle.removeEventListener('input', changePromptPos);
+    textEle.removeEventListener('focus', showPromptContainerEle);
+    textEle.removeEventListener('blur', hidePromptContainerEle);
   }
 }
 
