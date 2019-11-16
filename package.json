@@ -1,0 +1,32 @@
+{
+  "name": "text-cursor-prompt",
+  "version": "1.0.0",
+  "description": "根据文本框当前输入位置弹出提示框",
+  "main": "dist/index_bundle.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "example": "http-server -p 8880"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vortesnail/text-cursor-prompt.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vortesnail/text-cursor-prompt/issues"
+  },
+  "homepage": "https://github.com/vortesnail/text-cursor-prompt#readme",
+  "devDependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/preset-env": "^7.6.3",
+    "babel-loader": "^8.0.6",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.9"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.6.0"
+  }
+}

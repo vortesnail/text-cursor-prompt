@@ -1,0 +1,6 @@
+example/
+node_modules/
+src/
+webpack.config.js
+.babelrc
+.gitignore
