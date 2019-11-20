@@ -42,22 +42,27 @@ function popTextCursorPrompt(textEle, promptContainerEle, promptTextELe, config)
     if (config.text.length !== 0) {
       promptContainerEle.style.visibility = 'visible';
       promptTextELe.innerHTML = config.text;
+      return;
     }
 
   }
 
   function showPromptContainerEle() {
+    // 重新加了 node
     if (config.text.length !== 0) {
-      console.log(config.text)
       promptContainerEle.style.visibility = 'visible';
-      promptTextELe.innerHTML = config.text;
       return;
     }
     hidePromptContainerEle();
   }
 
   function hidePromptContainerEle() {
-    promptContainerEle.style.visibility = 'hidden';
+    // 设置 100ms 延迟的原因是防止你插入的 dom 节点有事件监听
+    // 例如 click，点击之后再让其隐藏
+    // 不然会在点击时比你的事件发生之前就隐藏
+    setTimeout(() => {
+      promptContainerEle.style.visibility = 'hidden';
+    }, 100);
   }
 
   // start listen
@@ -66,6 +71,18 @@ function popTextCursorPrompt(textEle, promptContainerEle, promptTextELe, config)
     textEle.addEventListener('focus', showPromptContainerEle);
     textEle.addEventListener('blur', hidePromptContainerEle);
   }
+
+  // change config.text
+  this.changeText = function(newText) {
+    config.text = newText;
+    if (config.text.length !== 0) {
+      promptContainerEle.style.visibility = 'visible';
+      promptTextELe.innerHTML = config.text;
+      return;
+    }
+    hidePromptContainerEle();
+  }
+
   // end listen
   this.end = function() {
     textEle.removeEventListener('input', changePromptPos);
