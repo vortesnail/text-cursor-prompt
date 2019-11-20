@@ -32,7 +32,12 @@ const config = {
 }
 
 const popTextCursorPrompt = new window.popTextCursorPrompt(textEle, promptContainer, promptTextELe, config);
+
 popTextCursorPrompt.start();
+
+// you also can change the text what you want to show at any time
+const newText = 'new text that you wan to show';
+popTextCursorPrompt.changeText(newText);
 
 // you want to close this feature when something finished
 // you can do that as the followed code
