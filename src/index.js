@@ -57,10 +57,12 @@ function popTextCursorPrompt(textEle, promptContainerEle, promptTextELe, config)
   }
 
   function hidePromptContainerEle() {
+    if (timer) clearTimeout(timer);
     // 设置 100ms 延迟的原因是防止你插入的 dom 节点有事件监听
     // 例如 click，点击之后再让其隐藏
     // 不然会在点击时比你的事件发生之前就隐藏
-    setTimeout(() => {
+    console.log('will hide')
+    var timer = setTimeout(function() {
       promptContainerEle.style.visibility = 'hidden';
     }, 100);
   }
