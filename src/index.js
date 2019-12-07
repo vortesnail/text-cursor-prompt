@@ -13,7 +13,7 @@ function popTextCursorPrompt(textEle, promptContainerEle, promptTextELe, config)
       moveDuration: 0.1
     }
   */
-
+  var promptEnterTag = false;
   // get current cursor position, it returns a integer
   function getCursorPosition(obj) {
     let cursorIndex = 0;
@@ -47,8 +47,8 @@ function popTextCursorPrompt(textEle, promptContainerEle, promptTextELe, config)
 
   }
 
+  // show the promptContainerEle
   function showPromptContainerEle() {
-    // 重新加了 node
     if (config.text.length !== 0) {
       promptContainerEle.style.visibility = 'visible';
       return;
@@ -57,14 +57,15 @@ function popTextCursorPrompt(textEle, promptContainerEle, promptTextELe, config)
   }
 
   function hidePromptContainerEle() {
-    if (timer) clearTimeout(timer);
-    // 设置 100ms 延迟的原因是防止你插入的 dom 节点有事件监听
-    // 例如 click，点击之后再让其隐藏
-    // 不然会在点击时比你的事件发生之前就隐藏
-    console.log('will hide')
-    var timer = setTimeout(function() {
-      promptContainerEle.style.visibility = 'hidden';
-    }, 100);
+    if (!promptEnterTag) {
+      if (timer) clearTimeout(timer);
+      // 设置 100ms 延迟的原因是防止你插入的 dom 节点有事件监听
+      // 例如 click，点击之后再让其隐藏
+      // 不然会在点击时比你的事件发生之前就隐藏
+      var timer = setTimeout(function() {
+        promptContainerEle.style.visibility = 'hidden';
+      }, 100);
+    }
   }
 
   // start listen
@@ -72,6 +73,8 @@ function popTextCursorPrompt(textEle, promptContainerEle, promptTextELe, config)
     textEle.addEventListener('input', changePromptPos);
     textEle.addEventListener('focus', showPromptContainerEle);
     textEle.addEventListener('blur', hidePromptContainerEle);
+    promptContainerEle.addEventListener('mouseenter', this.setEnterPromptTagToTrue);
+    promptContainerEle.addEventListener('mouseleave', this.setEnterPromptTagToFalse);
   }
 
   // change config.text
@@ -85,11 +88,23 @@ function popTextCursorPrompt(textEle, promptContainerEle, promptTextELe, config)
     hidePromptContainerEle();
   }
 
+  // set promptEnterTag = true;
+  this.setEnterPromptTagToTrue = function() {
+    promptEnterTag = true;
+  }
+
+  // set promptEnterTag = false;
+  this.setEnterPromptTagToFalse = function() {
+    promptEnterTag = false;
+  }
+
   // end listen
   this.end = function() {
     textEle.removeEventListener('input', changePromptPos);
     textEle.removeEventListener('focus', showPromptContainerEle);
     textEle.removeEventListener('blur', hidePromptContainerEle);
+    promptContainerEle.removeEventListener('mouseenter', this.setEnterPromptTagToTrue);
+    promptContainerEle.removeEventListener('mouseleave', this.setEnterPromptTagToFalse);
   }
 }
 
